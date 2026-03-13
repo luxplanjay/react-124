@@ -57,5 +57,5 @@ export const createPost = async (newPost: NewPostData): Promise<Post> => {
 
 // const getSomeData = async () => {
 //   const res = await fetch("");
-//   const json = await res.json() as User;
-// }
+//   const json = (await res.json()) as User;
+// };
