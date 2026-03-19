@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "title": "State in React",
+    "body": "State is a built-in object in React that allows components to manage and update their own data. It is used to store information that can change over time, such as user input, API responses, or any other dynamic data. State is typically initialized in the constructor of a class component or using the useState hook in functional components. When the state changes, React re-renders the component to reflect the updated data."
+  },
+  {
+    "id": 2,
+    "title": "Props in React",
+    "body": "Props (short for properties) are a way to pass data from a parent component to a child component in React. They are read-only and cannot be modified by the child component. Props are used to customize the behavior and appearance of a component, allowing for reusable and modular code. In functional components, props are passed as an argument, while in class components, they are accessed through this.props."
+  },
+  {
+    "id": 3,
+    "title": "Lifecycle Methods in React",
+    "body": "Lifecycle methods are special methods in React class components that allow you to hook into different stages of a component's lifecycle. These methods include componentDidMount, componentDidUpdate, and componentWillUnmount, among others. They are used to perform side effects, such as fetching data from an API, updating the DOM, or cleaning up resources when a component is unmounted."
+  },
+  {
+    "id": 4,
+    "title": "Hooks in React",
+    "body": "Hooks are a new addition to React that allow you to use state and other React features in functional components. The most commonly used hooks are useState, useEffect, and useContext. Hooks provide a way to manage state and side effects in functional components without the need for class components, making it easier to write and maintain code."
+  },
+  {
+    "id": 5,
+    "title": "React Router",
+    "body": "React Router is a popular library for handling routing in React applications. It allows you to create single-page applications with navigation between different views or pages. React Router provides components like BrowserRouter, Route, and Link to manage routing and navigation in your application."
+  },
+  {
+    "id": 6,
+    "title": "Redux in React",
+    "body": "Redux is a state management library that can be used with React to manage the state of your application in a predictable way. It provides a central store for all the state in your application, and allows you to dispatch actions to update the state. Redux is often used in larger applications where managing state across multiple components can become complex."
+  }
+]
