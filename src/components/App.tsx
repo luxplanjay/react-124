@@ -1,46 +1,46 @@
 import { useState } from "react";
-import ClickCounter from "./ClickCounter";
-import InventoryTracker from "./InventoryTracker";
-import Reader from "./Reader";
-import articles from "../articles.json";
+import { Bars } from "react-loader-spinner";
+import SearchForm from "./SearchForm/SearchForm";
+import ArticleList from "./ArticleList/ArticleList";
+import type { Article } from "../types/article";
+import { getArticles } from "../services/articleSerivce";
 
 export default function App() {
-  const [counter, setCounter] = useState<number>(0);
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
-  const updateCounter = () => setCounter(counter + 1);
-
-  const [isTextVisible, setIsTextVisible] = useState<boolean>(false);
-
-  const toggleText = () => setIsTextVisible(!isTextVisible);
+  const fetchArticles = async (searchTopic: string) => {
+    try {
+      setIsLoading(true);
+      setIsError(false);
+      const newArticles = await getArticles(searchTopic);
+      setArticles(newArticles);
+    } catch {
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <>
-      <Reader items={articles} />
-
-      <hr />
-      <InventoryTracker />
-
-      <hr />
-      <ClickCounter value={counter} onUpdate={updateCounter} />
-      <ClickCounter value={counter} onUpdate={updateCounter} />
-      <ClickCounter value={counter} onUpdate={updateCounter} />
-
-      <hr />
-      <button onClick={toggleText}>{isTextVisible ? "Hide" : "Show"}</button>
-      {isTextVisible && (
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore
-          magnam nesciunt excepturi enim ipsam labore voluptates quia iure
-          laudantium, placeat, atque provident qui quidem perspiciatis ut
-          tenetur ratione earum? Voluptatum!
-        </p>
+      <SearchForm onSearch={fetchArticles} />
+      {/* {isLoading && <>Loading articles, please wait...</
+      strong>} */}
+      {isLoading && (
+        <Bars
+          height="80"
+          width="80"
+          color="#4fa94d"
+          ariaLabel="bars-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
       )}
+      {isError && <strong>Та капець це помилка все пропало!!!!!</strong>}
+      {articles.length > 0 && <ArticleList items={articles} />}
     </>
   );
 }
-
-// render 1 > App() > create state 0 > render jsx
-// setCounter(0 + 1) > state update > count = 1
-// render 2 > App() > return state 1 > render jsx
-// setCounter(1 + 1) > state update > count = 2
-// render 3 > App() > return state 2 > render jsx
