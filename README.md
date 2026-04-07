@@ -1,35 +1,37 @@
-# Заняття 8 - Форми з Formik
+# Заняття 9 - Мутації з TanStack Query
 
-- Бібліотека [Formik](https://formik.org/)
-- Контейнер форми `Formik` та `Form`
-  - Пропс `initialValues`
-  - Пропс `onSubmit`
-- Поля форми `Field`
-  - Атрибут `name`
-- Стилізація компонентів `Formik`
-- Типізація `initialValues`
-- Параметри `values` та `actions` у `onSubmit`
-- Типи полів через пропс `as`
-- Доступ до властивостей `Formik` у JSX через Render Prop
-- Валідація з [`Yup`](https://github.com/jquense/yup)
-  - Схема валідаціі
-  - Можливі аргументи функції-валідатора
-  - Пропс `validationSchema`
-- Компонент `ErrorMessage`
-  - Пропс `component`
+## CRUD
 
-## Повна форма
+- Postman
+- https://62584f320c918296a49543e7.mockapi.io/tasks
 
-```tsx
-export default function OrderForm() {
-  const fieldId = useId();
+GET /tasks
+GET /tasks/767
 
-  return (
-    <form className={css.form}>
-      <button type="submit" className={css.button}>
-        Place order
-      </button>
-    </form>
-  );
-}
-```
+<!-- Create Read Update Delete -->
+<!-- POST   GET  PATCH  DELETE -->
+
+<!-- POST /tasks {} -->
+
+<!-- PATCH /tasks/767 {}  -->
+
+<!-- DELETE /tasks/767 -->
+
+## Мутації
+
+- Видалення завдання
+- Хук `useMutation`
+  - mutationFn
+  - onSuccess
+  - onError
+- Функція `mutate`
+
+## Інвалідація кеша
+
+- Хук `useQueryClient`
+- Метод `invalidateQueries`
+
+## Практика
+
+- Створення завдання через форму в модальному вікні
+- Редагування завдання. Зміна стану completed через чекбокс
