@@ -3,22 +3,22 @@ import css from "./TaskForm.module.css";
 import { createTask } from "../../services/taskService";
 
 interface TaskFormProps {
-  onEnd: () => void;
+  onAddTask: () => void;
 }
 
-export default function TaskForm({ onEnd }: TaskFormProps) {
+export default function TaskForm({ onAddTask }: TaskFormProps) {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: createTask,
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
-      onEnd();
+      onAddTask();
     },
   });
 
   const handleSubmit = (formData: FormData) => {
-    mutation.mutate({
+    mutation.mutateAsync({
       text: formData.get("text") as string,
     });
   };

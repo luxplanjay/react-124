@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { Task } from "../../types/task";
 import css from "./TaskList.module.css";
 import { deleteTask, updateTask } from "../../services/taskService";
+// import { useDeleteTask } from "../../hooks/useDeleteTask";
 
 interface TaskListProps {
   tasks: Task[];
@@ -10,14 +11,12 @@ interface TaskListProps {
 export default function TaskList({ tasks }: TaskListProps) {
   const queryClient = useQueryClient();
 
+  // const deleteMutation = useDeleteTask();
   // delete
   const deleteMutation = useMutation({
     mutationFn: deleteTask,
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
-    },
-    onError() {
-      console.log("ERROR");
     },
   });
 
@@ -25,7 +24,6 @@ export default function TaskList({ tasks }: TaskListProps) {
   const updateMutation = useMutation({
     mutationFn: updateTask,
     onSuccess() {
-      console.log("Success updae");
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
     },
   });

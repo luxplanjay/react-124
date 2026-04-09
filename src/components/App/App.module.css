@@ -11,6 +11,7 @@
   display: flex;
   justify-content: flex-end;
   margin-bottom: 24px;
+  gap: 8px;
 }
 
 .createButton {
