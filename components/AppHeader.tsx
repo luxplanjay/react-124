@@ -1,20 +1,29 @@
 import Link from "next/link";
+import css from "./AppHeader.module.css";
 
 export default function AppHeader() {
   return (
     <header>
-      <ul style={{ display: "flex", gap: 8, listStyle: "none" }}>
+      <ul className={css.list}>
         <li>
-          <Link href="/">Home</Link>
+          <Link href="/" className={css.link}>
+            Home
+          </Link>
         </li>
         <li>
-          <Link href="/about">About</Link>
+          <Link href="/recipes" className={css.link}>
+            Recipes
+          </Link>
         </li>
         <li>
-          <Link href="/profile">Profile</Link>
+          <Link href="/profile" className={css.link}>
+            Profile
+          </Link>
         </li>
         <li>
-          <Link href="/posts">Posts</Link>
+          <Link href="/tasks" className={css.link}>
+            Tasks
+          </Link>
         </li>
       </ul>
     </header>

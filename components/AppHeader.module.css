@@ -1,0 +1,17 @@
+.list {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid black;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
