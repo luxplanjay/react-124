@@ -1,3 +1,3 @@
 export default function Loading() {
-  return <strong>Loading DATA, please wait...</strong>;
+  return <strong>Loading data, please wait...</strong>;
 }

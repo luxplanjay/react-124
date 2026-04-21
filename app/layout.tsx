@@ -29,6 +29,7 @@ export default function RootLayout({
       <body>
         <TanStackProvider>
           <AppHeader />
+
           {children}
         </TanStackProvider>
       </body>
