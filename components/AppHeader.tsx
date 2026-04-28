@@ -11,18 +11,8 @@ export default function AppHeader() {
           </Link>
         </li>
         <li>
-          <Link href="/playlist" className={css.link}>
-            Playlist
-          </Link>
-        </li>
-        <li>
-          <Link href="/gallery" className={css.link}>
-            Gallery
-          </Link>
-        </li>
-        <li>
-          <Link href="/auth/login" className={css.link}>
-            Login
+          <Link href="/posts" className={css.link}>
+            Posts
           </Link>
         </li>
       </ul>
