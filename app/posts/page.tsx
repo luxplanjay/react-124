@@ -20,7 +20,7 @@ export default async function Posts() {
   const data = await getPosts();
   return (
     <div>
-      <h1>Recent posts</h1>
+      <h1>Recent posts {new Date().toLocaleTimeString()}</h1>
       <ul>
         {data.posts.map((post) => (
           <li key={post.id}>

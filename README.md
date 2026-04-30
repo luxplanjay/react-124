@@ -1,19 +1,7 @@
-# Заняття 15
+# Заняття 16
 
-- Layout Metadata (Global SEO setup)
-  - title
-  - description
-- [Open graph tags](https://socialsharepreview.com/)
-  - title
-  - description
-  - type
-  - url
-  - siteName
-  - [opengraph-image](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/opengraph-image)
-- Metadata for individual pages
-- Dynamic pages SEO with generateMetadata
-- [Sitemap](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap)
-- [Robots](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/robots)
+- Global state management
+- Zustand
 
 ## Data fetching
 
@@ -24,7 +12,7 @@
 Для сторінок якім майже не потрібно оновлення. Наприклад сторінка поста блога або сторінка для маркетингу якогось продукта.
 
 ```text
-cache: force-cahce
+cache: force-cache
 ```
 
 Обов'яково кешує дані.
@@ -41,7 +29,7 @@ cache: no-store
 
 Каже нексту не кешувати дані.
 
-### ISR (Incremental Static REgeneration)
+### ISR (Incremental Static Regeneration)
 
 Гібрид між двома попередніми, добре підходить для сторінок які можуть змінюватись з часом, але не на кожен запит.
 

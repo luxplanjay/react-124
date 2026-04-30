@@ -19,7 +19,9 @@ interface PostsResponse {
 }
 
 export const getPosts = async () => {
-  const res = await fetch("https://dummyjson.com/posts");
+  const res = await fetch("https://dummyjson.com/posts", {
+    next: { revalidate: 10 },
+  });
   if (!res.ok) throw new Error("Failed to fetch posts");
   const data = (await res.json()) as PostsResponse;
   return data;

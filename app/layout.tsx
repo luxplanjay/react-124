@@ -3,6 +3,7 @@ import { Geist, Roboto } from "next/font/google";
 import AppHeader from "@/components/AppHeader";
 import "./globals.css";
 import TanStackProvider from "@/components/TanStackProvider";
+import AppFooter from "@/components/AppFooter";
 
 const robotoFont = Roboto({
   variable: "--font-roboto",
@@ -44,6 +45,7 @@ export default function RootLayout({
         <TanStackProvider>
           <AppHeader />
           {children}
+          <AppFooter />
         </TanStackProvider>
       </body>
     </html>
