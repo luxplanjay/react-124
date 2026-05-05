@@ -1,35 +1,95 @@
-interface Post {
-  id: number;
+import axios from "axios";
+
+export const nextServer = axios.create({
+  baseURL: "http://localhost:3000/api",
+  withCredentials: true,
+});
+
+export type Note = {
+  id: string;
   title: string;
-  body: string;
-  tags: string[];
-  reactions: {
-    likes: number;
-    dislikes: number;
-  };
-  views: number;
-  userId: number;
-}
-
-interface PostsResponse {
-  posts: Post[];
-  total: number;
-  skip: number;
-  limit: number;
-}
-
-export const getPosts = async () => {
-  const res = await fetch("https://dummyjson.com/posts", {
-    next: { revalidate: 10 },
-  });
-  if (!res.ok) throw new Error("Failed to fetch posts");
-  const data = (await res.json()) as PostsResponse;
-  return data;
+  content: string;
+  categoryId: string;
+  userId: string;
+  createdAt: string;
+  updatedAt: string;
 };
 
-export const getPostById = async (postId: number) => {
-  const res = await fetch(`https://dummyjson.com/posts/${postId}`);
-  if (!res.ok) throw new Error("Failed to fetch post");
-  const data = (await res.json()) as Post;
-  return data;
+export type NoteListResponse = {
+  notes: Note[];
+  total: number;
+};
+
+// localhost:3000 > GET localhost:300/api/notes
+export const getNotes = async (categoryId?: string) => {
+  // GET localhost:300/api/notes
+  const res = await nextServer.get<NoteListResponse>("/notes", {
+    params: { categoryId },
+  });
+  return res.data;
+};
+
+// localhost:3000 > locahost:3000/api/notes/:noteId
+export const getSingleNote = async (id: string) => {
+  const res = await nextServer.get<Note>(`/notes/${id}`);
+  return res.data;
+};
+
+export type Category = {
+  id: string;
+  name: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+// localhost:3000 > locahost:3000/api/categories
+export const getCategories = async () => {
+  const res = await nextServer.get<Category[]>("/categories");
+  return res.data;
+};
+
+export type NewNoteData = {
+  title: string;
+  content: string;
+  categoryId: string;
+};
+
+// localhost:300 > POST localhost:3000/api/notes
+export const createNote = async (data: NewNoteData) => {
+  const res = await nextServer.post<Note>("/notes", data);
+  return res.data;
+};
+
+// AUTH
+export type RegisterRequest = {
+  email: string;
+  password: string;
+  userName: string;
+};
+
+export type User = {
+  id: string;
+  email: string;
+  userName?: string;
+  photoUrl?: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+// localhost:300 > POST localhost:3000/api/auth/register
+export const register = async (data: RegisterRequest) => {
+  const res = await nextServer.post<User>("/auth/register", data);
+  return res.data;
+};
+
+export type LoginRequest = {
+  email: string;
+  password: string;
+};
+
+// localhost:300 > POST localhost:3000/api/auth/login
+export const login = async (data: LoginRequest) => {
+  const res = await nextServer.post<User>("/auth/login", data);
+  return res.data;
 };
