@@ -1,24 +1,25 @@
-import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
-import AppHeader from "@/components/AppHeader";
-import TanStackProvider from "@/components/TanStackProvider";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Roboto } from 'next/font/google';
+import AppHeader from '@/components/AppHeader';
+import TanStackProvider from '@/components/TanStackProvider';
+import './globals.css';
+import AuthProvider from '@/components/AuthProvider';
 
 const robotoFont = Roboto({
-  variable: "--font-roboto",
-  subsets: ["latin"],
-  display: "swap",
+  variable: '--font-roboto',
+  subsets: ['latin'],
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: "Notes app",
-  description: "A simple notes app",
+  title: 'Notes app',
+  description: 'A simple notes app',
   openGraph: {
-    type: "website",
-    url: process.env.OG_APP_URL || "http://localhost:3000",
-    title: "Notes App",
-    description: "A simple notes app",
-    siteName: "Notes App",
+    type: 'website',
+    url: process.env.OG_APP_URL || 'http://localhost:3000',
+    title: 'Notes App',
+    description: 'A simple notes app',
+    siteName: 'Notes App',
   },
 };
 
@@ -31,8 +32,10 @@ export default function RootLayout({
     <html lang="en" className={robotoFont.variable}>
       <body>
         <TanStackProvider>
-          <AppHeader />
-          {children}
+          <AuthProvider>
+            <AppHeader />
+            {children}
+          </AuthProvider>
         </TanStackProvider>
       </body>
     </html>

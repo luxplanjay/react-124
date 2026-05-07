@@ -1,31 +1,34 @@
-"use client";
+'use client';
 
-import { login, LoginRequest } from "@/lib/api";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { ApiError } from "../api/api";
+import { login, LoginRequest } from '@/lib/api/clientApi';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { ApiError } from '../api/api';
+import { useAuthStore } from '@/lib/store/authStore';
 
 export default function Login() {
   const router = useRouter();
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
+  const setUser = useAuthStore((state) => state.setUser);
 
   const handleSubmit = async (formData: FormData) => {
     try {
       // Типізуємо дані форми
       const formValues = Object.fromEntries(formData) as LoginRequest;
       // Виконуємо запит
-      const res = await login(formValues);
+      const user = await login(formValues);
       // Виконуємо редірект або відображаємо помилку
-      if (res) {
-        router.push("/profile");
+      if (user) {
+        setUser(user);
+        router.push('/profile');
       } else {
-        setError("Invalid email or password");
+        setError('Invalid email or password');
       }
     } catch (error) {
       setError(
         (error as ApiError).response?.data?.error ??
           (error as ApiError).message ??
-          "Oops... some error",
+          'Oops... some error',
       );
     }
   };

@@ -1,5 +1,5 @@
-import NoteForm from "@/components/NoteForm";
-import { getCategories } from "@/lib/api";
+import NoteForm from '@/components/NoteForm';
+import { getCategories } from '@/lib/api/clientApi';
 
 export default async function CreateNotePage() {
   const categories = await getCategories();

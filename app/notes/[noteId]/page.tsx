@@ -1,4 +1,5 @@
-import { getSingleNote } from "@/lib/api";
+// import { getSingleNote } from '@/lib/api/clientApi';
+import { getServerSingleNote } from '@/lib/api/serverApi';
 
 type Props = {
   params: Promise<{ noteId: string }>;
@@ -6,7 +7,7 @@ type Props = {
 
 export default async function NotePage({ params }: Props) {
   const { noteId } = await params;
-  const note = await getSingleNote(noteId);
+  const note = await getServerSingleNote(noteId);
 
   return (
     <div>

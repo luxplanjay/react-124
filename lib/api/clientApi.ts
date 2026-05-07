@@ -1,9 +1,4 @@
-import axios from "axios";
-
-export const nextServer = axios.create({
-  baseURL: "http://localhost:3000/api",
-  withCredentials: true,
-});
+import { nextServer } from './api';
 
 export type Note = {
   id: string;
@@ -23,7 +18,7 @@ export type NoteListResponse = {
 // localhost:3000 > GET localhost:300/api/notes
 export const getNotes = async (categoryId?: string) => {
   // GET localhost:300/api/notes
-  const res = await nextServer.get<NoteListResponse>("/notes", {
+  const res = await nextServer.get<NoteListResponse>('/notes', {
     params: { categoryId },
   });
   return res.data;
@@ -45,7 +40,7 @@ export type Category = {
 
 // localhost:3000 > locahost:3000/api/categories
 export const getCategories = async () => {
-  const res = await nextServer.get<Category[]>("/categories");
+  const res = await nextServer.get<Category[]>('/categories');
   return res.data;
 };
 
@@ -57,7 +52,7 @@ export type NewNoteData = {
 
 // localhost:300 > POST localhost:3000/api/notes
 export const createNote = async (data: NewNoteData) => {
-  const res = await nextServer.post<Note>("/notes", data);
+  const res = await nextServer.post<Note>('/notes', data);
   return res.data;
 };
 
@@ -79,7 +74,7 @@ export type User = {
 
 // localhost:300 > POST localhost:3000/api/auth/register
 export const register = async (data: RegisterRequest) => {
-  const res = await nextServer.post<User>("/auth/register", data);
+  const res = await nextServer.post<User>('/auth/register', data);
   return res.data;
 };
 
@@ -90,6 +85,24 @@ export type LoginRequest = {
 
 // localhost:300 > POST localhost:3000/api/auth/login
 export const login = async (data: LoginRequest) => {
-  const res = await nextServer.post<User>("/auth/login", data);
+  const res = await nextServer.post<User>('/auth/login', data);
   return res.data;
+};
+
+type CheckSessionRequest = {
+  success: boolean;
+};
+
+export const checkSession = async () => {
+  const res = await nextServer.get<CheckSessionRequest>('/auth/session');
+  return res.data.success;
+};
+
+export const getMe = async () => {
+  const { data } = await nextServer.get<User>('/auth/me');
+  return data;
+};
+
+export const logout = async (): Promise<void> => {
+  await nextServer.post('/auth/logout');
 };

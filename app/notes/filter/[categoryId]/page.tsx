@@ -1,5 +1,5 @@
-import { getNotes } from "@/lib/api";
-import Link from "next/link";
+import { getNotes } from '@/lib/api/clientApi';
+import Link from 'next/link';
 
 type Props = {
   params: Promise<{ categoryId: string }>;
@@ -7,7 +7,7 @@ type Props = {
 
 export default async function NotesPage({ params }: Props) {
   const { categoryId } = await params;
-  const category = categoryId === "all" ? undefined : categoryId;
+  const category = categoryId === 'all' ? undefined : categoryId;
   const { notes } = await getNotes(category);
 
   return (

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
-import { Category, createNote, NewNoteData } from "@/lib/api";
-import { useMutation } from "@tanstack/react-query";
+import { useRouter } from 'next/navigation';
+import { Category, createNote, NewNoteData } from '@/lib/api/clientApi';
+import { useMutation } from '@tanstack/react-query';
 
 type Props = {
   categories: Category[];
@@ -14,15 +14,15 @@ const NoteForm = ({ categories }: Props) => {
   const { mutate } = useMutation({
     mutationFn: createNote,
     onSuccess: () => {
-      router.push("/notes/filter/all");
+      router.push('/notes/filter/all');
     },
     onError(error) {
-      console.error("Failed to create note:", error);
+      console.error('Failed to create note:', error);
     },
   });
 
   const handleCancel = () => {
-    router.push("/notes/filter/all");
+    router.push('/notes/filter/all');
   };
 
   const handleSubmit = (formData: FormData) => {

@@ -1,29 +1,32 @@
-"use client";
+'use client';
 
-import { register, RegisterRequest } from "@/lib/api";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { ApiError } from "../api/api";
+import { register, RegisterRequest } from '@/lib/api/clientApi';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { ApiError } from '../api/api';
+import { useAuthStore } from '@/lib/store/authStore';
 
 export default function Register() {
   const router = useRouter();
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
+  const setUser = useAuthStore((state) => state.setUser);
 
   const handleSubmit = async (formData: FormData) => {
     try {
       const formValues = Object.fromEntries(formData) as RegisterRequest;
-      const res = await register(formValues);
-      console.log(res);
-      if (res) {
-        router.push("/profile");
+      const user = await register(formValues);
+
+      if (user) {
+        setUser(user);
+        router.push('/profile');
       } else {
-        setError("Invalid email or password");
+        setError('Invalid email or password');
       }
     } catch (error) {
       setError(
         (error as ApiError).response?.data?.error ??
           (error as ApiError).message ??
-          "Oops... some error",
+          'Oops... some error',
       );
     }
   };

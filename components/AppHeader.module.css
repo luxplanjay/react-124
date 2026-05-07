@@ -21,3 +21,9 @@
 .link:hover {
   text-decoration: underline;
 }
+
+.userMenu {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
